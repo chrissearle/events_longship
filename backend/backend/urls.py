@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from events.views import (EventView, AttendeeView)
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^event/(?P<slug>[-\w]+)/attend$', AttendeeView.as_view()),
+    url(r'^event/(?P<slug>[-\w]+)/$', EventView.as_view()),
 ]
