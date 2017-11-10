@@ -1,0 +1,33 @@
+version: '2'  
+services:
+  nginx:
+    build: frontend
+    container_name: events_longship_nginx
+    ports:
+      - "8000:8000"
+    volumes:
+      - content:/src
+    depends_on:
+      - web
+  web:
+    build: backend
+    container_name: events_longship_django
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn backend.wsgi -b 0.0.0.0:8000"
+    depends_on:
+      - db
+    volumes:
+      - content:/src
+    expose:
+      - "8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PORT=5432
+
+  db:
+    image: postgres:latest
+    container_name: events_longship_postgres
+
+volumes:
+  content:
