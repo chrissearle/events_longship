@@ -26,6 +26,11 @@ class AttendeeView(APIView):
             data.update(request.data)
             data.update({"event": event.pk})
 
+            adults = ['LE','RO','FR']
+
+            if data['section'] in adults:
+                data['main_contact_name'] = data['name']
+
             serializer = AttendeeSerializer(data=data)
 
             if serializer.is_valid():

@@ -5,11 +5,10 @@ from rest_framework import serializers
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ('title', 'slug', 'description', 'start_dt', 'end_dt', 'location', 'price')
-        lookup_field = 'slug'
-        extra_kwargs = {
-            'url': {'lookup_field': 'slug'}
-        }
+        fields = (
+            'title', 'slug', 'description', 'start_dt', 'end_dt', 'location', 'price', 'contact_name', 'contact_email',
+            'contact_phone')
+
 
 class AttendeeSerializer(serializers.ModelSerializer):
     class Meta:

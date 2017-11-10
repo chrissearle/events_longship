@@ -12,6 +12,16 @@ class Event(models.Model):
         max_digits=5,
         decimal_places=2,
     )
+    contact_name = models.CharField(
+        max_length=200,
+    )
+    contact_email = models.CharField(
+        max_length=200,
+    )
+    contact_phone = models.CharField(
+        max_length=30,
+        blank=True
+    )
 
     def __str__(self):
         return self.title
@@ -36,12 +46,30 @@ class Attendee(models.Model):
 
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    main_contact_name = models.CharField(max_length=200)
-    main_contact_phone = models.CharField(max_length=30)
-    main_contact_email = models.EmailField(max_length=200)
-    alt_contact_phone = models.CharField(max_length=30, blank=True)
-    alt_contact_name = models.CharField(max_length=200, blank=True)
-    alt_contact_email = models.EmailField(max_length=200, blank=True)
+    main_contact_name = models.CharField(
+        max_length=200,
+        blank=True,
+    )
+    main_contact_phone = models.CharField(
+        max_length=30,
+        blank=True,
+    )
+    main_contact_email = models.EmailField(
+        max_length=200,
+        blank=True,
+    )
+    alt_contact_phone = models.CharField(
+        max_length=30,
+        blank=True,
+    )
+    alt_contact_name = models.CharField(
+        max_length=200,
+        blank=True,
+    )
+    alt_contact_email = models.EmailField(
+        max_length=200,
+        blank=True,
+    )
     section = models.CharField(
         max_length=2,
         choices=SECTION,
