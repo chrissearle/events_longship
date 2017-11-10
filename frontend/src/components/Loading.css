@@ -1,0 +1,8 @@
+.react-spinner {
+    width: 100px;
+    height: 100px;
+}
+
+.react-spinner_bar {
+    background-color: black;
+}
