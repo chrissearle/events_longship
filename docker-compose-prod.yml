@@ -1,0 +1,43 @@
+version: '2'  
+services:
+  nginx:
+    image: chrissearle/events_longship_nginx
+    container_name: events_longship_nginx
+    ports:
+      - "8000:8000"
+    volumes:
+      - content:/src
+    depends_on:
+      - web
+    networks:
+      - events_longship
+  web:
+    image: chrissearle/events_longship_django
+    container_name: events_longship_django
+    command: bash -c "sleep 5 && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn backend.wsgi -b 0.0.0.0:8000"
+    depends_on:
+      - db
+    volumes:
+      - content:/src
+    expose:
+      - "8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PORT=5432
+    networks:
+      - events_longship
+
+  db:
+    image: postgres:latest
+    container_name: events_longship_postgres
+    networks:
+      - events_longship
+
+volumes:
+  content:
+
+networks:
+  events_longship:
+    driver: bridge
