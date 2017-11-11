@@ -150,7 +150,7 @@ class Form extends Component {
             },
             {
                 value: 'FR',
-                label: 'Friend',
+                label: 'Venn',
             },
         ];
 
