@@ -29,9 +29,7 @@ class App extends Component {
                         />
                         <Route render={() => (
                             <Message>
-                                <div className="paper">
-                                    <NoSuchEvent/>
-                                </div>
+                                <NoSuchEvent/>
                             </Message>
                         )}/>
                     </Switch>

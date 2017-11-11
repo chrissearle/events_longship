@@ -5,7 +5,9 @@ import 'react-spinner/react-spinner.css';
 class Loading extends Component {
     render() {
         return (
-            <Spinner/>
+            <div className="loader">
+                <Spinner/>
+            </div>
         );
     }
 }
