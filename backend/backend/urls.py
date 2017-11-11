@@ -18,6 +18,9 @@ from django.conf.urls.static import (settings, static)
 from django.contrib import admin
 from events.views import (EventView, AttendeeView)
 
+admin.site.site_header = 'Longship Events Admin'
+admin.site.site_title = 'Longship Events'
+admin.site.index_title = 'Events Administration'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
