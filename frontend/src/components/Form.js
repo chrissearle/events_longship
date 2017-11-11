@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Radio, {RadioGroup} from 'material-ui/Radio';
-import {FormControl, FormControlLabel, FormGroup, FormLabel, FormHelperText} from 'material-ui/Form';
+import PropTypes from 'prop-types';
+import {FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel} from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
 
 import EventServices from '../services/EventServices';
 
@@ -277,6 +278,9 @@ class Form extends Component {
                 <Button raised color="primary" disabled={!complete} onClick={this.sendAnswer}>
                     Send svar
                 </Button>
+                <Typography type="caption">
+                    All informasjon oppgitt vil be slettet etter at arrangementet er ferdig
+                </Typography>
             </div>
         );
     }
