@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Radio, {RadioGroup} from 'material-ui/Radio';
-import {FormControl, FormControlLabel, FormGroup, FormLabel} from 'material-ui/Form';
+import {FormControl, FormControlLabel, FormGroup, FormLabel, FormHelperText} from 'material-ui/Form';
+import Select from 'material-ui/Select';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 
@@ -78,16 +79,18 @@ class Form extends Component {
 
     renderTextField = (name, label, helpText, required, type = 'input') => {
         return (
-            <TextField
-                name={name}
-                label={label}
-                helperText={helpText}
-                value={this.state.answer[name] || ''}
-                required={required}
-                onChange={this.handleChange}
-                fullWidth
-                type={type}
-            />
+            <FormGroup className="form-group">
+                <TextField
+                    name={name}
+                    label={label}
+                    helperText={helpText}
+                    value={this.state.answer[name] || ''}
+                    required={required}
+                    onChange={this.handleChange}
+                    fullWidth
+                    type={type}
+                />
+            </FormGroup>
         )
     };
 
@@ -101,7 +104,7 @@ class Form extends Component {
 
     renderAttending = () => {
         return (
-            <FormGroup>
+            <FormGroup className="form-group">
                 <FormControl component="fieldset" required>
                     <FormLabel component="legend">Blir du med?</FormLabel>
                     <RadioGroup
@@ -151,24 +154,25 @@ class Form extends Component {
         ];
 
         return (
-            <FormGroup>
-                <TextField
-                    name="section"
-                    select
-                    required
-                    label="Enhet"
-                    value={this.state.answer.section}
-                    onChange={this.handleSelectChange('section')}
-                    helperText="Hvilken enhet tilhører du (velg Venn hvis ingen andre passer)"
-                    margin="normal"
-                >
-                    {sections.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                    fullWidth
-                </TextField>
+            <FormGroup className="form-group">
+                <FormControl component="fieldset" required>
+                    <FormLabel component="legend">Enhet</FormLabel>
+                    <Select
+                        name="section"
+                        native
+                        value={this.state.answer.section}
+                        onChange={this.handleSelectChange('section')}
+                        className="section-select"
+                        fullWidth
+                    >
+                        {sections.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </Select>
+                    <FormHelperText>Hvilken enhet tilhører du (velg Venn hvis ingen andre passer)</FormHelperText>
+                </FormControl>
             </FormGroup>
         )
     };
@@ -215,17 +219,19 @@ class Form extends Component {
             return (
                 <div>
                     <h3>Annet</h3>
-                    <TextField
-                        name="notes"
-                        label="Annet informasjon"
-                        value={this.state.answer.notes || ''}
-                        onChange={this.handleChange}
-                        helperText="Annet informasjon som lederne bør vite - f.eks. matallergier osv"
-                        multiline={true}
-                        rows={1}
-                        rowsMax={20}
-                        fullWidth
-                    />
+                    <FormGroup className="form-group">
+                        <TextField
+                            name="notes"
+                            label="Annet informasjon"
+                            value={this.state.answer.notes || ''}
+                            onChange={this.handleChange}
+                            helperText="Annet informasjon som lederne bør vite - f.eks. matallergier osv"
+                            multiline={true}
+                            rows={1}
+                            rowsMax={20}
+                            fullWidth
+                        />
+                    </FormGroup>
                 </div>
             )
         }

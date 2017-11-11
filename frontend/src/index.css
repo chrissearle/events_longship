@@ -24,3 +24,11 @@ body {
 .react-spinner_bar {
     background-color: black;
 }
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.section-select select {
+    width: calc(100% - 32px);
+}
