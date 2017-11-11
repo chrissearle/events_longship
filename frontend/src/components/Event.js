@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
-import Card, {CardContent, CardActions} from 'material-ui/Card';
+import Card, {CardContent, CardActions, CardMedia} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import List, {ListItem, ListItemText} from 'material-ui/List';
 import moment from 'moment';
@@ -22,10 +22,19 @@ class InfoCard extends Component {
     render() {
         return (
             <Card>
+                {this.props.media &&
+                <CardMedia
+                    className="img-wrapper"
+                    image={this.props.media}
+                />
+                }
+                {(this.props.header || this.props.body) &&
                 <CardContent>
+                    {this.props.header &&
                     <Typography type="headline" component="h2">
                         {this.props.header}
                     </Typography>
+                    }
                     {this.props.body &&
                     <List>
                         {this.props.body.map(body => (
@@ -35,21 +44,23 @@ class InfoCard extends Component {
                         ))}
                     </List>
                     }
-                    {this.props.actions &&
-                    <CardActions>
-                        <Button dense color="primary" href={this.props.actions.href}>
-                            {this.props.actions.text}
-                        </Button>
-                    </CardActions>
-                    }
                 </CardContent>
+                }
+                {this.props.actions &&
+                <CardActions>
+                    <Button dense color="primary" href={this.props.actions.href}>
+                        {this.props.actions.text}
+                    </Button>
+                </CardActions>
+                }
             </Card>
         )
     }
 }
 
 InfoCard.propTypes = {
-    header: PropTypes.string.isRequired,
+    media: PropTypes.string,
+    header: PropTypes.string,
     body: PropTypes.arrayOf(PropTypes.string),
     actions: PropTypes.shape({
         text: PropTypes.string.isRequired,
@@ -114,6 +125,9 @@ class Event extends Component {
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={3}>
+                    {event.image &&
+                    <InfoCard media={event.image}/>
+                    }
                     <InfoCard header={"Hvor"} body={[event.location]}/>
                     <InfoCard header={"Når"} body={[formatDate(event.start_dt), formatDate(event.end_dt)]}/>
                     {event.deadline_dt &&

@@ -32,3 +32,8 @@ body {
 .section-select select {
     width: calc(100% - 32px);
 }
+
+.img-wrapper {
+    height: 200px;
+    background-position: top !important;
+}
