@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils import timezone
+from django.utils.html import format_html
 from .models import (Event, Attendee)
 from import_export.admin import ExportActionModelAdmin
 
@@ -42,7 +43,10 @@ class EventAdmin(admin.ModelAdmin):
     price_in_nok.admin_order_field = 'price'
     price_in_nok.short_description = 'Price'
 
-    list_display = ('title', 'location', 'start_time_seconds', 'end_time_seconds', 'price_in_nok')
+    def public_link(self, obj):
+        return format_html("<a href='/{url}'>{url}</a>", url=obj.slug)
+
+    list_display = ('title', 'location', 'start_time_seconds', 'end_time_seconds', 'price_in_nok', 'public_link')
     prepopulated_fields = {"slug": ("title",)}
 
 
