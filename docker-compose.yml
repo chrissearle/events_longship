@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - content:/src
+      - content:/static
     depends_on:
       - web
     networks:
@@ -20,7 +20,7 @@ services:
     depends_on:
       - db
     volumes:
-      - content:/src
+      - content:/static
     expose:
       - "8000"
     environment:
@@ -28,8 +28,8 @@ services:
       - DB_NAME=postgres
       - DB_USER=postgres
       - DB_PORT=5432
-      - STATIC_ROOT=/src/static
-      - MEDIA_ROOT=/src/media
+      - STATIC_ROOT=/static/static
+      - MEDIA_ROOT=/static/media
     networks:
       - events_longship
 
