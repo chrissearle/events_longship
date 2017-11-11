@@ -22,6 +22,14 @@ class Event(models.Model):
         max_length=30,
         blank=True
     )
+    image = models.ImageField(
+        upload_to='events/images/',
+        blank=True
+    )
+    invitation = models.FileField(
+        upload_to='events/invites/',
+        blank=True
+    )
 
     def __str__(self):
         return self.title

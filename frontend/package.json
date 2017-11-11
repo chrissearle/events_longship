@@ -19,5 +19,12 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:8000"
+  "proxy": {
+    "/event": {
+      "target": "http://localhost:8000/"
+    },
+    "/media": {
+      "target": "http://localhost:8000/"
+    }
+  }
 }

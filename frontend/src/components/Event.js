@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
-import Card, {CardContent} from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Card, {CardContent, CardActions} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import List, {ListItem, ListItemText} from 'material-ui/List';
 
@@ -12,8 +13,7 @@ import EventServices from '../services/EventServices';
 import Loading from './Loading';
 import NoSuchEvent from './NoSuchEvent';
 import Form from './Form';
-
-import './Event.css';
+import Message from './Message';
 
 import {formatDate} from '../formatters';
 
@@ -82,6 +82,7 @@ class Event extends Component {
                             </List>
                         </CardContent>
                     </Card>
+                    {event.price > 0 &&
                     <Card>
                         <CardContent>
                             <Typography type="headline" component="h2">
@@ -94,6 +95,7 @@ class Event extends Component {
                             </List>
                         </CardContent>
                     </Card>
+                    }
                     <Card>
                         <CardContent>
                             <Typography type="headline" component="h2">
@@ -106,12 +108,28 @@ class Event extends Component {
                                 <ListItem>
                                     <ListItemText primary={event.contact_email}/>
                                 </ListItem>
+                                {event.contact_phone &&
                                 <ListItem>
                                     <ListItemText primary={event.contact_phone}/>
                                 </ListItem>
+                                }
                             </List>
                         </CardContent>
                     </Card>
+                    {event.invitation &&
+                    <Card>
+                        <CardContent>
+                            <Typography type="headline" component="h2">
+                                Informasjon
+                            </Typography>
+                            <CardActions>
+                                <Button dense color="primary" href={event.invitation}>
+                                    Last Ned
+                                </Button>
+                            </CardActions>
+                        </CardContent>
+                    </Card>
+                    }
                 </Grid>
             </Grid>
         )
@@ -120,25 +138,21 @@ class Event extends Component {
     renderState() {
         if (this.state.error) {
             return (
-                <Grid className="maingrid" container spacing={24}>
-                    <Grid item xs={12}>
-                        <div className="paper">
-                            <NoSuchEvent/>
-                        </div>
-                    </Grid>
-                </Grid>
+                <Message>
+                    <div className="paper">
+                        <NoSuchEvent/>
+                    </div>
+                </Message>
             )
         }
 
         if (this.state.loading) {
             return (
-                <Grid className="maingrid" container spacing={24}>
-                    <Grid item xs={12}>
-                        <div className="loader">
-                            <Loading/>
-                        </div>
-                    </Grid>
-                </Grid>
+                <Message>
+                    <div className="loader">
+                        <Loading/>
+                    </div>
+                </Message>
             )
         }
 

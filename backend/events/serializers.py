@@ -7,7 +7,7 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = (
             'title', 'slug', 'description', 'start_dt', 'end_dt', 'location', 'price', 'contact_name', 'contact_email',
-            'contact_phone')
+            'contact_phone', 'image', 'invitation')
 
 
 class AttendeeSerializer(serializers.ModelSerializer):

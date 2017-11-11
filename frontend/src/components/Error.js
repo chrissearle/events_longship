@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 
+import Message from './Message';
+
 class Error extends Component {
     render() {
         return (
-            <div>
+            <Message>
                 <h2>Beklager - noe gikk galt</h2>
-            </div>
+            </Message>
         );
     }
 }

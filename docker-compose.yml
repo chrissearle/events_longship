@@ -10,11 +10,13 @@ services:
       - content:/src
     depends_on:
       - web
+    networks:
+      - events_longship
   web:
     build: backend
     image: chrissearle/events_longship_django
     container_name: events_longship_django
-    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn backend.wsgi -b 0.0.0.0:8000"
+    command: bash -c "sleep 5 && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn backend.wsgi -b 0.0.0.0:8000"
     depends_on:
       - db
     volumes:
@@ -26,10 +28,20 @@ services:
       - DB_NAME=postgres
       - DB_USER=postgres
       - DB_PORT=5432
+      - STATIC_ROOT=/src/static
+      - MEDIA_ROOT=/src/media
+    networks:
+      - events_longship
 
   db:
     image: postgres:latest
     container_name: events_longship_postgres
+    networks:
+      - events_longship
 
 volumes:
   content:
+
+networks:
+  events_longship:
+    driver: bridge

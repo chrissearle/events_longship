@@ -10,8 +10,6 @@ import EventServices from '../services/EventServices';
 
 import Error from './Error';
 
-import './Event.css';
-
 class Form extends Component {
     state = {
         delivered: false,

@@ -1,5 +1,26 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.maingrid {
+    flexGrow: 1
+}
+
+.paper {
+    padding: 20px;
+}
+
+.loader {
+    padding: 100px;
+}
+
+.react-spinner {
+    width: 100px;
+    height: 100px;
+}
+
+.react-spinner_bar {
+    background-color: black;
 }
