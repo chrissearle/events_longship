@@ -7,6 +7,7 @@ class Event(models.Model):
     description = models.TextField()
     start_dt = models.DateTimeField('event start')
     end_dt = models.DateTimeField('event end')
+    deadline_dt = models.DateTimeField('deadline', blank=True, null=True)
     location = models.CharField(max_length=200)
     price = models.DecimalField(
         max_digits=5,

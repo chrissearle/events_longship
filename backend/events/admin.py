@@ -30,6 +30,12 @@ class EventAdmin(admin.ModelAdmin):
     end_time_seconds.admin_order_field = 'end_dt'
     end_time_seconds.short_description = 'End'
 
+    def deadline_time_seconds(self, obj):
+        return format_date(obj.deadline_dt)
+
+    deadline_time_seconds.admin_order_field = 'deadline_dt'
+    deadline_time_seconds.short_description = 'Registration Deadline'
+
     def price_in_nok(self, obj):
         return str(obj.price) + ' NOK'
 

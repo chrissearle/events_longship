@@ -7,6 +7,7 @@ import Button from 'material-ui/Button';
 import Card, {CardContent, CardActions} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import List, {ListItem, ListItemText} from 'material-ui/List';
+import moment from 'moment';
 
 import EventServices from '../services/EventServices';
 
@@ -16,6 +17,45 @@ import Form from './Form';
 import Message from './Message';
 
 import {formatDate} from '../formatters';
+
+class InfoCard extends Component {
+    render() {
+        return (
+            <Card>
+                <CardContent>
+                    <Typography type="headline" component="h2">
+                        {this.props.header}
+                    </Typography>
+                    {this.props.body &&
+                    <List>
+                        {this.props.body.map(body => (
+                            <ListItem key={body}>
+                                <ListItemText primary={body}/>
+                            </ListItem>
+                        ))}
+                    </List>
+                    }
+                    {this.props.actions &&
+                    <CardActions>
+                        <Button dense color="primary" href={this.props.actions.href}>
+                            {this.props.actions.text}
+                        </Button>
+                    </CardActions>
+                    }
+                </CardContent>
+            </Card>
+        )
+    }
+}
+
+InfoCard.propTypes = {
+    header: PropTypes.string.isRequired,
+    body: PropTypes.arrayOf(PropTypes.string),
+    actions: PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        href: PropTypes.string.isRequired
+    })
+};
 
 class Event extends Component {
     state = {
@@ -38,6 +78,14 @@ class Event extends Component {
         });
     }
 
+    isOpen(deadline) {
+        if (!deadline) {
+            return true;
+        }
+
+        return moment().isBefore(moment(deadline));
+    }
+
     renderEvent(event) {
         return (
             <Grid className="maingrid" container spacing={24}>
@@ -49,86 +97,40 @@ class Event extends Component {
 
                         <ReactMarkdown source={event.description}/>
 
-                        <Paper className="paper">
-                            <Form event={this.props.event}/>
-                        </Paper>
+                        {this.isOpen(event.deadline_dt) ? (
+                                <Paper className="paper">
+                                    <Form event={this.props.event}/>
+                                </Paper>
+                            )
+                            :
+                            (
+                                <Message>
+                                    <h2>Beklager - men det er nå etter påmeldingsfristen.</h2>
+
+                                    <p>Du kan prøve å ta kontakt med arrangør men det er muligens for seint.</p>
+                                </Message>
+                            )
+                        }
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={3}>
-                    <Card>
-                        <CardContent>
-                            <Typography type="headline" component="h2">
-                                Hvor
-                            </Typography>
-                            <List>
-                                <ListItem>
-                                    <ListItemText primary={event.location}/>
-                                </ListItem>
-                            </List>
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardContent>
-                            <Typography type="headline" component="h2">
-                                Når
-                            </Typography>
-                            <List>
-                                <ListItem>
-                                    <ListItemText primary={formatDate(event.start_dt)}/>
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemText primary={formatDate(event.end_dt)}/>
-                                </ListItem>
-                            </List>
-                        </CardContent>
-                    </Card>
-                    {event.price > 0 &&
-                    <Card>
-                        <CardContent>
-                            <Typography type="headline" component="h2">
-                                Pris
-                            </Typography>
-                            <List>
-                                <ListItem>
-                                    <ListItemText primary={`${event.price} kr.`}/>
-                                </ListItem>
-                            </List>
-                        </CardContent>
-                    </Card>
+                    <InfoCard header={"Hvor"} body={[event.location]}/>
+                    <InfoCard header={"Når"} body={[formatDate(event.start_dt), formatDate(event.end_dt)]}/>
+                    {event.deadline_dt &&
+                    <InfoCard header={"Påmeldingsfrist"} body={[formatDate(event.deadline_dt)]}/>
                     }
-                    <Card>
-                        <CardContent>
-                            <Typography type="headline" component="h2">
-                                Kontaktinfo
-                            </Typography>
-                            <List>
-                                <ListItem>
-                                    <ListItemText primary={event.contact_name}/>
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemText primary={event.contact_email}/>
-                                </ListItem>
-                                {event.contact_phone &&
-                                <ListItem>
-                                    <ListItemText primary={event.contact_phone}/>
-                                </ListItem>
-                                }
-                            </List>
-                        </CardContent>
-                    </Card>
+                    {event.price > 0 &&
+                    <InfoCard header={"Pris"} body={[`${event.price} kr.`]}/>
+                    }
+                    <InfoCard header={"Kontakt"} body={
+                        event.contact_phone
+                            ?
+                            [event.contact_name, event.contact_email, event.contact_phone]
+                            :
+                            [event.contact_name, event.contact_email]
+                    }/>
                     {event.invitation &&
-                    <Card>
-                        <CardContent>
-                            <Typography type="headline" component="h2">
-                                Informasjon
-                            </Typography>
-                            <CardActions>
-                                <Button dense color="primary" href={event.invitation}>
-                                    Last Ned
-                                </Button>
-                            </CardActions>
-                        </CardContent>
-                    </Card>
+                    <InfoCard header={"Informasjon"} actions={{text: "Last Ned", href: event.invitation}}/>
                     }
                 </Grid>
             </Grid>
