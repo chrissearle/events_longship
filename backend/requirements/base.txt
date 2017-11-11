@@ -7,3 +7,4 @@ django-import-export
 markdown
 gunicorn
 pillow
+django-cleanup
