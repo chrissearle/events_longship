@@ -37,3 +37,12 @@ body {
     height: 200px;
     background-position: top !important;
 }
+
+h2.header {
+    display: flex;
+    line-height: 40px;
+}
+
+h2.header .logo {
+    margin-right: 8px;
+}

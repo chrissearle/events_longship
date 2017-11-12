@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import moment from 'moment';
+import Avatar from 'material-ui/Avatar';
 
 import EventServices from '../services/EventServices';
 
@@ -18,6 +19,8 @@ import LocationCard from './cards/LocationCard';
 import ContactCard from './cards/ContactCard';
 import DeadlineCard from './cards/DeadlineCard';
 import TimeCard from './cards/TimeCard';
+
+import logo from '../assets/logo.png';
 
 class Event extends Component {
     state = {
@@ -68,10 +71,13 @@ class Event extends Component {
 
     renderEvent(event) {
         return (
-            <Grid className="maingrid" container spacing={24}>
-                <Grid item xs={12} sm={9}>
+            <Grid className="maingrid" container spacing={8}>
+                <Grid item xs={12} sm={7} md={8} lg={9} xl={10}>
                     <div className="paper">
-                        <h2>{event.title}</h2>
+                        <h2 className="header">
+                            <Avatar src={logo} className="logo"/>
+                            {event.title}
+                        </h2>
 
                         <h3>{event.location}</h3>
 
@@ -80,7 +86,7 @@ class Event extends Component {
                         {this.renderForm(event)}
                     </div>
                 </Grid>
-                <Grid item xs={12} sm={3}>
+                <Grid item xs={12} sm={5} md={4} lg={3} xl={2}>
                     <ImageCard image={event.image}/>
 
                     <LocationCard location={event.location}/>
@@ -102,17 +108,13 @@ class Event extends Component {
     render() {
         if (this.state.error) {
             return (
-                <Message>
-                    <NoSuchEvent/>
-                </Message>
+                <NoSuchEvent/>
             )
         }
 
         if (this.state.loading) {
             return (
-                <Message>
-                    <Loading/>
-                </Message>
+                <Loading/>
             )
         }
 

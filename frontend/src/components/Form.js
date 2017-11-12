@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import {FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel} from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import Button from 'material-ui/Button';
-import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 
 import EventServices from '../services/EventServices';
 
 import Error from './Error';
+import Message from "./Message";
 
 class Form extends Component {
     state = {
@@ -241,27 +241,19 @@ class Form extends Component {
     render() {
         if (this.state.error) {
             return (
-                <Grid className="maingrid" container spacing={24}>
-                    <Grid item xs={12}>
-                        <div className="paper">
-                            <Error/>
-                        </div>
-                    </Grid>
-                </Grid>
+                <Error/>
             )
         }
 
         if (this.state.delivered) {
             return (
-                <Grid className="maingrid" container spacing={24}>
-                    <Grid item xs={12}>
-                        <div className="paper">
-                            <h2>Tusen Takk</h2>
+                <Message>
+                    <div className="paper">
+                        <h2>Tusen Takk</h2>
 
-                            <p>Vi har nå mottatt ditt svar.</p>
-                        </div>
-                    </Grid>
-                </Grid>
+                        <p>Vi har nå mottatt ditt svar.</p>
+                    </div>
+                </Message>
             )
         }
 
