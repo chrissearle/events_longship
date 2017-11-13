@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import Message from './Message';
 
+import {textFor} from "../formatters";
+
 class NoSuchEvent extends Component {
     render() {
         return (
             <Message>
-                <div class="paper">
-                    <h2>Arrangement finnes ikke</h2>
+                <div className="paper">
+                    <h2>{textFor('error.notfound.title')}</h2>
 
-                    <p>Vi kunne ikke finne arrangementet du ønsket. Vennligst sjekk lenken du har fått.</p>
+                    <p>{textFor('error.notfound.body')}</p>
                 </div>
             </Message>
         );

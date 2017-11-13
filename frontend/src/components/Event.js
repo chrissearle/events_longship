@@ -22,6 +22,8 @@ import TimeCard from './cards/TimeCard';
 
 import logo from '../assets/logo.png';
 
+import {textFor} from '../formatters';
+
 class Event extends Component {
     state = {
         loading: true,
@@ -61,9 +63,9 @@ class Event extends Component {
         } else {
             return (
                 <Message>
-                    <h2>Beklager - men det er nå etter påmeldingsfristen.</h2>
+                    <h2>{textFor('error.passed_deadline.title')}</h2>
 
-                    <p>Du kan prøve å ta kontakt med arrangør men det er muligens for seint.</p>
+                    <p>{textFor('error.passed_deadline.body')}</p>
                 </Message>
             )
         }

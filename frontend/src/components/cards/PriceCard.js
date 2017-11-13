@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import Payment from 'material-ui-icons/Payment';
 
 import InfoCard from './InfoCard';
+import {textFor} from "../../formatters";
 
 class PriceCard extends Component {
     render() {
         if (this.props.price && this.props.price > 0) {
             return (
                 <InfoCard
-                    header={"Pris"}
+                    header={textFor('card.price.title')}
                     body={
                         [
                             {

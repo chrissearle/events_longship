@@ -12,6 +12,8 @@ import EventServices from '../services/EventServices';
 import Error from './Error';
 import Message from "./Message";
 
+import {textFor, objectFor} from "../formatters";
+
 class Form extends Component {
     state = {
         delivered: false,
@@ -78,13 +80,13 @@ class Form extends Component {
         return ['RO', 'LE', 'FR'].includes(section);
     };
 
-    renderTextField = (name, label, helpText, required, type = 'input') => {
+    renderTextField = (name, textKey, required, type = 'input') => {
         return (
             <FormGroup className="form-group">
                 <TextField
                     name={name}
-                    label={label}
-                    helperText={helpText}
+                    label={textFor(`${textKey}.title`)}
+                    helperText={textFor(`${textKey}.helptext`)}
                     value={this.state.answer[name] || ''}
                     required={required}
                     onChange={this.handleChange}
@@ -107,14 +109,14 @@ class Form extends Component {
         return (
             <FormGroup className="form-group">
                 <FormControl component="fieldset" required>
-                    <FormLabel component="legend">Blir du med?</FormLabel>
+                    <FormLabel component="legend">{textFor('form.attending.title')}</FormLabel>
                     <RadioGroup
                         name="attending"
                         value={this.state.answer.attending}
                         onChange={this.handleChange}
                     >
-                        <FormControlLabel value="true" control={<Radio/>} label="Ja - jeg blir med"/>
-                        <FormControlLabel value="false" control={<Radio/>} label="Nei - dessverre kan jeg ikke"/>
+                        <FormControlLabel value="true" control={<Radio/>} label={textFor('form.attending.yes')}/>
+                        <FormControlLabel value="false" control={<Radio/>} label={textFor('form.attending.no')}/>
                     </RadioGroup>
                 </FormControl>
             </FormGroup>
@@ -123,41 +125,16 @@ class Form extends Component {
     };
 
     renderName = () => {
-        return this.renderTextField("name", "Navn", "Navn på deltaker", true);
+        return this.renderTextField("name", 'form.name', true);
     };
 
     renderSection = () => {
-        const sections = [
-            {
-                value: 'FL',
-                label: 'Flokken',
-            },
-            {
-                value: 'PI',
-                label: 'Pionerene',
-            },
-            {
-                value: 'SC',
-                label: 'Troppen',
-            },
-            {
-                value: 'RO',
-                label: 'Roverlaget',
-            },
-            {
-                value: 'LE',
-                label: 'Leder',
-            },
-            {
-                value: 'FR',
-                label: 'Venn',
-            },
-        ];
+        const sections = objectFor('sections');
 
         return (
             <FormGroup className="form-group">
                 <FormControl component="fieldset" required>
-                    <FormLabel component="legend">Enhet</FormLabel>
+                    <FormLabel component="legend">{textFor('form.section.title')}</FormLabel>
                     <Select
                         name="section"
                         native
@@ -172,7 +149,7 @@ class Form extends Component {
                             </option>
                         ))}
                     </Select>
-                    <FormHelperText>Hvilken enhet tilhører du (velg Venn hvis ingen andre passer)</FormHelperText>
+                    <FormHelperText>{textFor('form.section.helptext')}</FormHelperText>
                 </FormControl>
             </FormGroup>
         )
@@ -183,32 +160,32 @@ class Form extends Component {
             if (this.isAdult(this.state.answer.section)) {
                 return (
                     <div>
-                        <h3>Kontaktdetaljer</h3>
+                        <h3>{textFor('form.contactdetails.title')}</h3>
 
-                        {this.renderTextField("main_contact_email", "E-post", "", true, 'email')}
-                        {this.renderTextField("main_contact_phone", "Tlf/Mob", "", true, 'tel')}
+                        {this.renderTextField("main_contact_email", 'form.contact.email', true, 'email')}
+                        {this.renderTextField("main_contact_phone", 'form.contact.tel', true, 'tel')}
 
-                        <h3>Hjemmekontakt</h3>
-                        <p>Du kan oppgi et hjemmekontakt</p>
+                        <h3>{textFor('form.homecontact.title')}</h3>
+                        <p>{textFor('form.homecontact.body.optional')}</p>
 
-                        {this.renderTextField("alt_contact_name", "Navn", "Navn på hjemmekontakt", false)}
-                        {this.renderTextField("alt_contact_email", "E-post", "", false, 'email')}
-                        {this.renderTextField("alt_contact_phone", "Tlf/Mob", "", false, 'tel')}
+                        {this.renderTextField("alt_contact_name", 'form.home.name', false)}
+                        {this.renderTextField("alt_contact_email", 'form.home.email', false, 'email')}
+                        {this.renderTextField("alt_contact_phone", 'form.home.tel', false, 'tel')}
                     </div>
                 )
             } else {
                 return (
                     <div>
-                        <h3>Hjemmekontakt</h3>
-                        <p>Vi trenger minst en hjemmekontakt, men du kan oppgi inntil 2</p>
+                        <h3>{textFor('form.homecontact.title')}</h3>
+                        <p>{textFor('form.homecontact.body.mandatory')}</p>
 
-                        {this.renderTextField("main_contact_name", "Navn", "Navn på hjemmekontakt #1", true)}
-                        {this.renderTextField("main_contact_email", "E-post", "", true, 'email')}
-                        {this.renderTextField("main_contact_phone", "Tlf/Mob", "", true, 'tel')}
+                        {this.renderTextField("main_contact_name", 'form.homecontact1.name', true)}
+                        {this.renderTextField("main_contact_email", 'form.homecontact1.email', true, 'email')}
+                        {this.renderTextField("main_contact_phone", 'form.homecontact1.tel', true, 'tel')}
 
-                        {this.renderTextField("alt_contact_name", "Navn", "Navn på hjemmekontakt #2", false)}
-                        {this.renderTextField("alt_contact_email", "E-post", "", false, 'email')}
-                        {this.renderTextField("alt_contact_phone", "Tlf/Mob", "", false, 'tel')}
+                        {this.renderTextField("alt_contact_name", 'form.homecontact2.name', false)}
+                        {this.renderTextField("alt_contact_email", 'form.homecontact2.email', false, 'email')}
+                        {this.renderTextField("alt_contact_phone", 'form.homecontact2.tel', false, 'tel')}
                     </div>
                 )
             }
@@ -223,10 +200,10 @@ class Form extends Component {
                     <FormGroup className="form-group">
                         <TextField
                             name="notes"
-                            label="Annet informasjon"
+                            label={textFor('form.notes.title')}
                             value={this.state.answer.notes || ''}
                             onChange={this.handleChange}
-                            helperText="Annet informasjon som lederne bør vite - f.eks. matallergier osv"
+                            helperText={textFor('form.notes.helptext')}
                             multiline={true}
                             rows={1}
                             rowsMax={20}
@@ -249,9 +226,9 @@ class Form extends Component {
             return (
                 <Message>
                     <div className="paper">
-                        <h2>Tusen Takk</h2>
+                        <h2>{textFor('form.delivered.title')}</h2>
 
-                        <p>Vi har nå mottatt ditt svar.</p>
+                        <p>{textFor('form.delivered.body')}</p>
                     </div>
                 </Message>
             )
@@ -268,10 +245,10 @@ class Form extends Component {
                 {this.renderContacts()}
                 {this.renderNotes()}
                 <Button raised color="primary" disabled={!complete} onClick={this.sendAnswer}>
-                    Send svar
+                    {textFor('form.button.title')}
                 </Button>
                 <Typography type="caption">
-                    All informasjon oppgitt vil be slettet etter at arrangementet er ferdig
+                    {textFor('form.button.helptext')}
                 </Typography>
             </div>
         );

@@ -5,14 +5,14 @@ import Warning from 'material-ui-icons/Warning';
 import InfoCard from './InfoCard';
 
 import {formatDate} from '../../formatters';
-
+import {textFor} from "../../formatters";
 
 class DeadlineCard extends Component {
     render() {
         if (this.props.deadline) {
             return (
                 <InfoCard
-                    header={"Påmeldingsfrist"}
+                    header={textFor('card.deadline.title')}
                     body={
                         [
                             {

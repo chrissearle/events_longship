@@ -6,11 +6,13 @@ import ContactPhone from 'material-ui-icons/ContactPhone';
 
 import InfoCard from './InfoCard';
 
+import {textFor} from "../../formatters";
+
 class EventCard extends Component {
     render() {
         return (
             <InfoCard
-                header={"Kontakt"}
+                header={textFor('card.contact.title')}
                 body={
                     this.props.phone
                         ?

@@ -1,0 +1,79 @@
+{
+  "card.contact.title": "Kontakt",
+  "card.deadline.title": "Påmeldingsfrist",
+  "card.info.download.title": "Last Ned",
+  "card.info.title": "Informasjon",
+  "card.location.title": "Hvor",
+  "card.price.title": "Pris",
+  "card.time.title": "Når",
+  "error.general.title": "Beklager - noe gikk galt",
+  "error.notfound.body": "Vi kunne ikke finne arrangementet du ønsket. Vennligst sjekk lenken du har fått.",
+  "error.notfound.title": "Arrangement finnes ikke",
+  "error.passed_deadline.body": "Du kan prøve å ta kontakt med arrangør men det er muligens for seint.",
+  "error.passed_deadline.title": "Beklager - men det er nå etter påmeldingsfristen",
+  "form.attending.no": "Nei - dessverre kan jeg ikke",
+  "form.attending.title": "Blir du med?",
+  "form.attending.yes": "Ja - jeg blir med",
+  "form.button.helptext": "All informasjon oppgitt vil be slettet etter at arrangementet er ferdig",
+  "form.button.title": "Send svar",
+  "form.contact.email.helptext": "",
+  "form.contact.email.title": "E-post",
+  "form.contact.tel.helptext": "",
+  "form.contact.tel.title": "Tlf/Mob",
+  "form.contactdetails.title": "Kontaktdetaljer",
+  "form.delivered.body": "Vi har nå mottatt ditt svar.",
+  "form.delivered.title": "Tusen Takk",
+  "form.home.email.helptext": "",
+  "form.home.email.title": "E-post",
+  "form.home.name.helptext": "Navn på hjemmekontakt",
+  "form.home.name.title": "Navn",
+  "form.home.tel.helptext": "",
+  "form.home.tel.title": "Tlf/Mob",
+  "form.homecontact.body.mandatory": "Vi trenger minst en hjemmekontakt, men du kan oppgi inntil to",
+  "form.homecontact.body.optional": "Du kan oppgi et hjemmekontakt",
+  "form.homecontact.title": "Hjemmekontakt",
+  "form.homecontact1.email.helptext": "",
+  "form.homecontact1.email.title": "E-post",
+  "form.homecontact1.name.helptext": "Navn på hjemmekontakt #1",
+  "form.homecontact1.name.title": "Navn",
+  "form.homecontact1.tel.helptext": "",
+  "form.homecontact1.tel.title": "Tlf/Mob",
+  "form.homecontact2.email.helptext": "",
+  "form.homecontact2.email.title": "E-post",
+  "form.homecontact2.name.helptext": "Navn på hjemmekontakt #2",
+  "form.homecontact2.name.title": "Navn",
+  "form.homecontact2.tel.helptext": "",
+  "form.homecontact2.tel.title": "Tlf/Mob",
+  "form.name.helptext": "Navn på deltaker",
+  "form.name.title": "Navn",
+  "form.notes.helptext": "Annet informasjon som lederne bør vite - f.eks. matallergier osv",
+  "form.notes.title": "Annet informasjon",
+  "form.section.helptext": "Hvilken enhet tilhører du (velg Venn hvis ingen andre passer)",
+  "form.section.title": "Enhet",
+  "sections": [
+    {
+      "value": "FL",
+      "label": "Flokken"
+    },
+    {
+      "value": "PI",
+      "label": "Pionerene"
+    },
+    {
+      "value": "SC",
+      "label": "Troppen"
+    },
+    {
+      "value": "RO",
+      "label": "Roverlaget"
+    },
+    {
+      "value": "LE",
+      "label": "Leder"
+    },
+    {
+      "alue": "FR",
+      "label": "Venn"
+    }
+  ]
+}

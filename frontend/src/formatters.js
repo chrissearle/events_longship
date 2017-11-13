@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/nb';
+import * as messages from "./messages.json";
 
 moment.locale("nb");
 
@@ -26,4 +27,12 @@ export function formatDuration(from, to) {
     }
 
     return (<span>{fromFormatted}{sep}{toFormatted}</span>);
+}
+
+export function objectFor(key) {
+    return messages[key];
+}
+
+export function textFor(key) {
+    return <span>{messages[key] || "missing translation for key: " + key}</span>
 }

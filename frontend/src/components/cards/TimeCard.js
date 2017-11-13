@@ -5,13 +5,13 @@ import DateRange from 'material-ui-icons/DateRange';
 import InfoCard from './InfoCard';
 
 import {formatDuration} from '../../formatters';
-
+import {textFor} from "../../formatters";
 
 class TimeCard extends Component {
     render() {
         return (
             <InfoCard
-                header={"Når"}
+                header={textFor('card.time.title')}
                 body={
                     [
                         {
