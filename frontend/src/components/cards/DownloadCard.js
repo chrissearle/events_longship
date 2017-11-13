@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import FileDownload from 'material-ui-icons/FileDownload';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import FileDownload from 'material-ui-icons/FileDownload'
 
-import InfoCard from './InfoCard';
-import {textFor} from '../../formatters';
+import InfoCard from './InfoCard'
+import {textFor} from '../../formatters'
 
 class DownloadCard extends Component {
     render() {
@@ -22,12 +22,12 @@ class DownloadCard extends Component {
             )
         }
 
-        return null;
+        return null
     }
 }
 
 DownloadCard.propTypes = {
     link: PropTypes.string
-};
+}
 
-export default DownloadCard;
+export default DownloadCard

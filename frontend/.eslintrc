@@ -31,6 +31,7 @@
     arrow-parens: 0,
     prefer-const: 2,
     no-var: 2,
-    quotes: [2, "single"]
+    quotes: [2, "single"],
+    semi: [2, "never"]
   }
 }

@@ -4,22 +4,22 @@ function getEvent(event, cb) {
     })
         .then(checkStatus)
         .then(parseJSON)
-        .then(cb);
+        .then(cb)
 }
 
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
-        return response;
+        return response
     }
 
-    const error = new Error(`HTTP Error ${response.statusText}`);
-    error.status = response.statusText;
-    error.response = response;
-    throw error;
+    const error = new Error(`HTTP Error ${response.statusText}`)
+    error.status = response.statusText
+    error.response = response
+    throw error
 }
 
 function parseJSON(response) {
-    return response.json();
+    return response.json()
 }
 
 function sendAnswer(event, answer, cb) {
@@ -32,9 +32,9 @@ function sendAnswer(event, answer, cb) {
         body: JSON.stringify(answer)
     })
         .then(checkStatus)
-        .then(cb);
+        .then(cb)
 }
 
-const EventService = {getEvent, sendAnswer};
+const EventService = {getEvent, sendAnswer}
 
-export default EventService;
+export default EventService

@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Contacts from 'material-ui-icons/Contacts';
-import ContactMail from 'material-ui-icons/ContactMail';
-import ContactPhone from 'material-ui-icons/ContactPhone';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import Contacts from 'material-ui-icons/Contacts'
+import ContactMail from 'material-ui-icons/ContactMail'
+import ContactPhone from 'material-ui-icons/ContactPhone'
 
-import InfoCard from './InfoCard';
+import InfoCard from './InfoCard'
 
-import {textFor} from '../../formatters';
+import {textFor} from '../../formatters'
 
 class EventCard extends Component {
     render() {
@@ -52,6 +52,6 @@ EventCard.propTypes = {
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     phone: PropTypes.string
-};
+}
 
-export default EventCard;
+export default EventCard

@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
-import InfoCard from './InfoCard';
+import InfoCard from './InfoCard'
 
 class ImageCard extends Component {
     render() {
@@ -11,13 +11,13 @@ class ImageCard extends Component {
             )
         }
 
-        return null;
+        return null
     }
 }
 
 ImageCard.propTypes = {
     image: PropTypes.string
-};
+}
 
-export default ImageCard;
+export default ImageCard
 

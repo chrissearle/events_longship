@@ -1,28 +1,28 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import ReactMarkdown from 'react-markdown';
-import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
-import moment from 'moment';
-import Avatar from 'material-ui/Avatar';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import ReactMarkdown from 'react-markdown'
+import Grid from 'material-ui/Grid'
+import Paper from 'material-ui/Paper'
+import moment from 'moment'
+import Avatar from 'material-ui/Avatar'
 
-import EventServices from '../services/EventServices';
+import EventServices from '../services/EventServices'
 
-import Loading from './Loading';
-import NoSuchEvent from './NoSuchEvent';
-import Form from './Form';
-import Message from './Message';
-import ImageCard from './cards/ImageCard';
-import PriceCard from './cards/PriceCard';
-import DownloadCard from './cards/DownloadCard';
-import LocationCard from './cards/LocationCard';
-import ContactCard from './cards/ContactCard';
-import DeadlineCard from './cards/DeadlineCard';
-import TimeCard from './cards/TimeCard';
+import Loading from './Loading'
+import NoSuchEvent from './NoSuchEvent'
+import Form from './Form'
+import Message from './Message'
+import ImageCard from './cards/ImageCard'
+import PriceCard from './cards/PriceCard'
+import DownloadCard from './cards/DownloadCard'
+import LocationCard from './cards/LocationCard'
+import ContactCard from './cards/ContactCard'
+import DeadlineCard from './cards/DeadlineCard'
+import TimeCard from './cards/TimeCard'
 
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.png'
 
-import {textFor} from '../formatters';
+import {textFor} from '../formatters'
 
 class Event extends Component {
     state = {
@@ -35,22 +35,22 @@ class Event extends Component {
             this.setState({
                 event: event,
                 loading: false
-            });
+            })
         }).catch(() => {
             this.setState({
                 event: undefined,
                 loading: false,
                 error: true
-            });
-        });
+            })
+        })
     }
 
     isOpen(deadline) {
         if (!deadline) {
-            return true;
+            return true
         }
 
-        return moment().isBefore(moment(deadline));
+        return moment().isBefore(moment(deadline))
     }
 
     renderForm(event) {
@@ -126,6 +126,6 @@ class Event extends Component {
 
 Event.propTypes = {
     event: PropTypes.string.isRequired
-};
+}
 
-export default Event;
+export default Event

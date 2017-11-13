@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import Grid from 'material-ui/Grid';
+import React, {Component} from 'react'
+import Grid from 'material-ui/Grid'
 
 class Message extends Component {
     render() {
@@ -13,4 +13,4 @@ class Message extends Component {
     }
 }
 
-export default Message;
+export default Message

@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import Spinner from 'react-spinner';
-import 'react-spinner/react-spinner.css';
-import Message from './Message';
+import React, {Component} from 'react'
+import Spinner from 'react-spinner'
+import 'react-spinner/react-spinner.css'
+import Message from './Message'
 
 class Loading extends Component {
     render() {
@@ -11,8 +11,8 @@ class Loading extends Component {
                     <Spinner/>
                 </div>
             </Message>
-        );
+        )
     }
 }
 
-export default Loading;
+export default Loading

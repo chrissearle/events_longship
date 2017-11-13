@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import Message from './Message';
+import React, {Component} from 'react'
+import Message from './Message'
 
-import {textFor} from '../formatters';
+import {textFor} from '../formatters'
 
 class NoSuchEvent extends Component {
     render() {
@@ -13,8 +13,8 @@ class NoSuchEvent extends Component {
                     <p>{textFor('error.notfound.body')}</p>
                 </div>
             </Message>
-        );
+        )
     }
 }
 
-export default NoSuchEvent;
+export default NoSuchEvent

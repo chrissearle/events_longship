@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
-import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import Button from 'material-ui/Button'
+import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card'
+import Typography from 'material-ui/Typography'
+import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List'
 
 class InfoCard extends Component {
     render() {
@@ -63,6 +63,6 @@ InfoCard.propTypes = {
         href: PropTypes.string.isRequired,
         icon: PropTypes.object
     })
-};
+}
 
-export default InfoCard;
+export default InfoCard

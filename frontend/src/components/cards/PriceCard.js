@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Payment from 'material-ui-icons/Payment';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import Payment from 'material-ui-icons/Payment'
 
-import InfoCard from './InfoCard';
-import {textFor} from '../../formatters';
+import InfoCard from './InfoCard'
+import {textFor} from '../../formatters'
 
 class PriceCard extends Component {
     render() {
@@ -23,12 +23,12 @@ class PriceCard extends Component {
             )
         }
 
-        return null;
+        return null
     }
 }
 
 PriceCard.propTypes = {
     price: PropTypes.string
-};
+}
 
-export default PriceCard;
+export default PriceCard

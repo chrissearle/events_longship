@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Warning from 'material-ui-icons/Warning';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import Warning from 'material-ui-icons/Warning'
 
-import InfoCard from './InfoCard';
+import InfoCard from './InfoCard'
 
-import {formatDate, textFor} from '../../formatters';
+import {formatDate, textFor} from '../../formatters'
 
 class DeadlineCard extends Component {
     render() {
@@ -24,12 +24,12 @@ class DeadlineCard extends Component {
             )
         }
 
-        return null;
+        return null
     }
 }
 
 DeadlineCard.propTypes = {
     deadline: PropTypes.string
-};
+}
 
-export default DeadlineCard;
+export default DeadlineCard

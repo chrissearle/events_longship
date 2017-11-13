@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import DateRange from 'material-ui-icons/DateRange';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import DateRange from 'material-ui-icons/DateRange'
 
-import InfoCard from './InfoCard';
+import InfoCard from './InfoCard'
 
-import {formatDuration, textFor} from '../../formatters';
+import {formatDuration, textFor} from '../../formatters'
 
 class TimeCard extends Component {
     render() {
@@ -27,6 +27,6 @@ class TimeCard extends Component {
 TimeCard.propTypes = {
     start_dt: PropTypes.string.isRequired,
     end_dt: PropTypes.string.isRequired
-};
+}
 
-export default TimeCard;
+export default TimeCard

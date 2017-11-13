@@ -1,18 +1,18 @@
-import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import Radio, {RadioGroup} from 'material-ui/Radio';
-import PropTypes from 'prop-types';
-import {FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel} from 'material-ui/Form';
-import Select from 'material-ui/Select';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
+import React, {Component} from 'react'
+import TextField from 'material-ui/TextField'
+import Radio, {RadioGroup} from 'material-ui/Radio'
+import PropTypes from 'prop-types'
+import {FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel} from 'material-ui/Form'
+import Select from 'material-ui/Select'
+import Button from 'material-ui/Button'
+import Typography from 'material-ui/Typography'
 
-import EventServices from '../services/EventServices';
+import EventServices from '../services/EventServices'
 
-import Error from './Error';
-import Message from './Message';
+import Error from './Error'
+import Message from './Message'
 
-import {textFor, objectFor} from '../formatters';
+import {textFor, objectFor} from '../formatters'
 
 class Form extends Component {
     state = {
@@ -24,7 +24,7 @@ class Form extends Component {
     };
 
     stateHasValue(key) {
-        return this.state.answer.hasOwnProperty(key) && !!this.state.answer[key];
+        return this.state.answer.hasOwnProperty(key) && !!this.state.answer[key]
     }
 
     sendAnswer = () => {
@@ -32,19 +32,19 @@ class Form extends Component {
             this.setState({
                 delivered: true,
                 error: false
-            });
+            })
         }).catch(() => {
             this.setState({
                 delivered: false,
                 error: true
-            });
-        });
+            })
+        })
     };
 
     setAnswer = (field, value) => {
-        const answer = this.state.answer || {section: 'SC'};
+        const answer = this.state.answer || {section: 'SC'}
 
-        answer[field] = value;
+        answer[field] = value
 
         this.setState({
             answer: answer
@@ -77,7 +77,7 @@ class Form extends Component {
     };
 
     isAdult = (section) => {
-        return ['RO', 'LE', 'FR'].includes(section);
+        return ['RO', 'LE', 'FR'].includes(section)
     };
 
     renderTextField = (name, textKey, required, type = 'input') => {
@@ -98,11 +98,11 @@ class Form extends Component {
     };
 
     handleSelectChange = name => event => {
-        this.setAnswer(name, event.target.value);
+        this.setAnswer(name, event.target.value)
     };
 
     handleChange = (event) => {
-        this.setAnswer(event.target.name, event.target.value);
+        this.setAnswer(event.target.name, event.target.value)
     };
 
     renderAttending = () => {
@@ -125,11 +125,11 @@ class Form extends Component {
     };
 
     renderName = () => {
-        return this.renderTextField('name', 'form.name', true);
+        return this.renderTextField('name', 'form.name', true)
     };
 
     renderSection = () => {
-        const sections = objectFor('sections');
+        const sections = objectFor('sections')
 
         return (
             <FormGroup className="form-group">
@@ -251,12 +251,12 @@ class Form extends Component {
                     {textFor('form.button.helptext')}
                 </Typography>
             </div>
-        );
+        )
     }
 }
 
 Form.propTypes = {
     event: PropTypes.string.isRequired
-};
+}
 
-export default Form;
+export default Form

@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Place from 'material-ui-icons/Place';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import Place from 'material-ui-icons/Place'
 
-import InfoCard from './InfoCard';
-import {textFor} from '../../formatters';
+import InfoCard from './InfoCard'
+import {textFor} from '../../formatters'
 
 class LocationCard extends Component {
     render() {
@@ -23,12 +23,12 @@ class LocationCard extends Component {
             )
         }
 
-        return null;
+        return null
     }
 }
 
 LocationCard.propTypes = {
     location: PropTypes.string
-};
+}
 
-export default LocationCard;
+export default LocationCard
