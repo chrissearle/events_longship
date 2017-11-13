@@ -10,10 +10,10 @@ class DownloadCard extends Component {
         if (this.props.link) {
             return (
                 <InfoCard
-                    header={textFor('card.download.title')}
+                    header={textFor('card.info.title')}
                     actions={
                         {
-                            text: textFor('card.download.button.title'),
+                            text: textFor('card.info.download.title'),
                             href: this.props.link,
                             icon: <FileDownload/>
                         }
