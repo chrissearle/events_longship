@@ -1,12 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/nb';
-import * as messages from "./messages.json";
+import * as messages from './messages.json';
 
-moment.locale("nb");
+moment.locale('nb');
 
 function standardFormat(date) {
-    return date.format("DD. MMM YYYY [kl.] HH:mm");
+    return date.format('DD. MMM YYYY [kl.] HH:mm');
 }
 
 export function formatDate(date) {
@@ -23,7 +23,7 @@ export function formatDuration(from, to) {
 
     if (fromDate.isSame(toDate, 'day')) {
         sep = ' - ';
-        toFormatted = toDate.local().format("HH:mm");
+        toFormatted = toDate.local().format('HH:mm');
     }
 
     return (<span>{fromFormatted}{sep}{toFormatted}</span>);
@@ -34,5 +34,5 @@ export function objectFor(key) {
 }
 
 export function textFor(key) {
-    return <span>{messages[key] || "missing translation for key: " + key}</span>
+    return <span>{messages[key] || 'missing translation for key: ' + key}</span>
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FileDownload from 'material-ui-icons/FileDownload';
 
 import InfoCard from './InfoCard';
-import {textFor} from "../../formatters";
+import {textFor} from '../../formatters';
 
 class DownloadCard extends Component {
     render() {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Message from './Message';
 
-import {textFor} from "../formatters";
+import {textFor} from '../formatters';
 
 class NoSuchEvent extends Component {
     render() {

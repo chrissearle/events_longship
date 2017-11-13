@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Place from 'material-ui-icons/Place';
 
 import InfoCard from './InfoCard';
-import {textFor} from "../../formatters";
+import {textFor} from '../../formatters';
 
 class LocationCard extends Component {
     render() {

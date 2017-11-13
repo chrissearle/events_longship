@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Payment from 'material-ui-icons/Payment';
 
 import InfoCard from './InfoCard';
-import {textFor} from "../../formatters";
+import {textFor} from '../../formatters';
 
 class PriceCard extends Component {
     render() {

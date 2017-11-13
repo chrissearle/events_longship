@@ -22,7 +22,7 @@ class App extends Component {
                 <BrowserRouter>
                     <Switch>
                         <Route
-                            path={"/:event"}
+                            path={'/:event'}
                             render={(route) => (
                                 <Event event={route.match.params.event}/>
                             )}

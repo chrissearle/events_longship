@@ -10,9 +10,9 @@ import Typography from 'material-ui/Typography';
 import EventServices from '../services/EventServices';
 
 import Error from './Error';
-import Message from "./Message";
+import Message from './Message';
 
-import {textFor, objectFor} from "../formatters";
+import {textFor, objectFor} from '../formatters';
 
 class Form extends Component {
     state = {
@@ -25,7 +25,7 @@ class Form extends Component {
 
     stateHasValue(key) {
         return this.state.answer.hasOwnProperty(key) && !!this.state.answer[key];
-    };
+    }
 
     sendAnswer = () => {
         EventServices.sendAnswer(this.props.event, this.state.answer, () => {
@@ -125,7 +125,7 @@ class Form extends Component {
     };
 
     renderName = () => {
-        return this.renderTextField("name", 'form.name', true);
+        return this.renderTextField('name', 'form.name', true);
     };
 
     renderSection = () => {
@@ -162,15 +162,15 @@ class Form extends Component {
                     <div>
                         <h3>{textFor('form.contactdetails.title')}</h3>
 
-                        {this.renderTextField("main_contact_email", 'form.contact.email', true, 'email')}
-                        {this.renderTextField("main_contact_phone", 'form.contact.tel', true, 'tel')}
+                        {this.renderTextField('main_contact_email', 'form.contact.email', true, 'email')}
+                        {this.renderTextField('main_contact_phone', 'form.contact.tel', true, 'tel')}
 
                         <h3>{textFor('form.homecontact.title')}</h3>
                         <p>{textFor('form.homecontact.body.optional')}</p>
 
-                        {this.renderTextField("alt_contact_name", 'form.home.name', false)}
-                        {this.renderTextField("alt_contact_email", 'form.home.email', false, 'email')}
-                        {this.renderTextField("alt_contact_phone", 'form.home.tel', false, 'tel')}
+                        {this.renderTextField('alt_contact_name', 'form.home.name', false)}
+                        {this.renderTextField('alt_contact_email', 'form.home.email', false, 'email')}
+                        {this.renderTextField('alt_contact_phone', 'form.home.tel', false, 'tel')}
                     </div>
                 )
             } else {
@@ -179,13 +179,13 @@ class Form extends Component {
                         <h3>{textFor('form.homecontact.title')}</h3>
                         <p>{textFor('form.homecontact.body.mandatory')}</p>
 
-                        {this.renderTextField("main_contact_name", 'form.homecontact1.name', true)}
-                        {this.renderTextField("main_contact_email", 'form.homecontact1.email', true, 'email')}
-                        {this.renderTextField("main_contact_phone", 'form.homecontact1.tel', true, 'tel')}
+                        {this.renderTextField('main_contact_name', 'form.homecontact1.name', true)}
+                        {this.renderTextField('main_contact_email', 'form.homecontact1.email', true, 'email')}
+                        {this.renderTextField('main_contact_phone', 'form.homecontact1.tel', true, 'tel')}
 
-                        {this.renderTextField("alt_contact_name", 'form.homecontact2.name', false)}
-                        {this.renderTextField("alt_contact_email", 'form.homecontact2.email', false, 'email')}
-                        {this.renderTextField("alt_contact_phone", 'form.homecontact2.tel', false, 'tel')}
+                        {this.renderTextField('alt_contact_name', 'form.homecontact2.name', false)}
+                        {this.renderTextField('alt_contact_email', 'form.homecontact2.email', false, 'email')}
+                        {this.renderTextField('alt_contact_phone', 'form.homecontact2.tel', false, 'tel')}
                     </div>
                 )
             }

@@ -6,7 +6,7 @@ import ContactPhone from 'material-ui-icons/ContactPhone';
 
 import InfoCard from './InfoCard';
 
-import {textFor} from "../../formatters";
+import {textFor} from '../../formatters';
 
 class EventCard extends Component {
     render() {

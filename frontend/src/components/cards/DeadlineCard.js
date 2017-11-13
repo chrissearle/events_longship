@@ -4,8 +4,7 @@ import Warning from 'material-ui-icons/Warning';
 
 import InfoCard from './InfoCard';
 
-import {formatDate} from '../../formatters';
-import {textFor} from "../../formatters";
+import {formatDate, textFor} from '../../formatters';
 
 class DeadlineCard extends Component {
     render() {

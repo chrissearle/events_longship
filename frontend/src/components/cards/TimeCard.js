@@ -4,8 +4,7 @@ import DateRange from 'material-ui-icons/DateRange';
 
 import InfoCard from './InfoCard';
 
-import {formatDuration} from '../../formatters';
-import {textFor} from "../../formatters";
+import {formatDuration, textFor} from '../../formatters';
 
 class TimeCard extends Component {
     render() {
