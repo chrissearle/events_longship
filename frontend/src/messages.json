@@ -1,6 +1,6 @@
 {
   "card.contact.title": "Kontakt",
-  "card.deadline.title": "Påmeldingsfrist",
+  "card.deadline.title": "Påmeldingsfrist",
   "card.info.download.title": "Last Ned",
   "card.info.title": "Informasjon",
   "card.location.title": "Hvor",
@@ -30,7 +30,7 @@
   "form.home.tel.helptext": "",
   "form.home.tel.title": "Tlf/Mob",
   "form.homecontact.body.mandatory": "Vi trenger minst en hjemmekontakt, men du kan oppgi inntil to",
-  "form.homecontact.body.optional": "Du kan oppgi et hjemmekontakt",
+  "form.homecontact.body.optional": "Du kan oppgi en hjemmekontakt",
   "form.homecontact.title": "Hjemmekontakt",
   "form.homecontact1.email.helptext": "",
   "form.homecontact1.email.title": "E-post",
@@ -46,8 +46,9 @@
   "form.homecontact2.tel.title": "Tlf/Mob",
   "form.name.helptext": "Navn på deltaker",
   "form.name.title": "Navn",
-  "form.notes.helptext": "Annet informasjon som lederne bør vite - f.eks. matallergier osv",
-  "form.notes.title": "Annet informasjon",
+  "form.notes.section.title": "Annet",
+  "form.notes.helptext": "Annen informasjon som lederne bør vite - f.eks. matallergier osv",
+  "form.notes.title": "Annen informasjon",
   "form.section.helptext": "Hvilken enhet tilhører du (velg Venn hvis ingen andre passer)",
   "form.section.title": "Enhet",
   "sections": [

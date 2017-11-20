@@ -196,7 +196,8 @@ class Form extends Component {
         if (this.state.answer.attending === 'true') {
             return (
                 <div>
-                    <h3>Annet</h3>
+                    <h3>{textFor('form.notes.section.title')}</h3>
+
                     <FormGroup className="form-group">
                         <TextField
                             name="notes"
