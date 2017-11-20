@@ -34,5 +34,15 @@ export function objectFor(key) {
 }
 
 export function textFor(key) {
-    return <span>{messages[key] || 'missing translation for key: ' + key}</span>
+    return (
+        <span>
+            {
+                messages[key] !== undefined
+                    ?
+                    messages[key]
+                    :
+                    'missing translation for key: ' + key
+            }
+        </span>
+    )
 }
