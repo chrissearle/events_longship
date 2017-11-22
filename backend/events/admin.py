@@ -6,8 +6,8 @@ from import_export.admin import ExportActionModelAdmin
 
 
 class AttendeeAdmin(ExportActionModelAdmin):
-    list_filter = ('event',)
-    list_display = ('name', 'attending', 'section')
+    list_filter = ('event', 'attending', 'section', )
+    list_display = ('name', 'attending', 'section', )
 
 
 admin.site.register(Attendee, AttendeeAdmin)
