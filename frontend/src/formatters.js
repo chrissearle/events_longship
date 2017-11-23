@@ -34,15 +34,12 @@ export function objectFor(key) {
 }
 
 export function textFor(key) {
+
+    const text = messages[key] !== undefined ?
+        messages[key] : 'missing translation for key: ' + key
+
     return (
-        <span>
-            {
-                messages[key] !== undefined
-                    ?
-                    messages[key]
-                    :
-                    'missing translation for key: ' + key
-            }
-        </span>
+        <span dangerouslySetInnerHTML={{__html: text}}/>
     )
 }
+

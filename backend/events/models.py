@@ -31,6 +31,10 @@ class Event(models.Model):
         upload_to='events/invites/',
         blank=True
     )
+    billed = models.BooleanField(
+        default=False,
+        help_text='Set true if we\'re going to send out a bill/faktura, false if we are going to accept cash/vipps/etc'
+    )
 
     def __str__(self):
         return self.title

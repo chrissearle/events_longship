@@ -19,6 +19,7 @@ class PriceCard extends Component {
                             }
                         ]
                     }
+                    footer={textFor(this.props.billed ? 'card.price.footer.bill' : 'card.price.footer.cash')}
                 />
             )
         }
@@ -28,7 +29,8 @@ class PriceCard extends Component {
 }
 
 PriceCard.propTypes = {
-    price: PropTypes.string
+    price: PropTypes.string,
+    billed: PropTypes.bool.isRequired
 }
 
 export default PriceCard

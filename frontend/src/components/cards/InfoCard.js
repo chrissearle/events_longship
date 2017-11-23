@@ -36,6 +36,11 @@ class InfoCard extends Component {
                         ))}
                     </List>
                     }
+                    {this.props.footer &&
+                    <Typography type="caption">
+                        {this.props.footer}
+                    </Typography>
+                    }
                 </CardContent>
                 }
                 {this.props.actions &&
@@ -58,6 +63,7 @@ InfoCard.propTypes = {
         body: PropTypes.string.isRequired,
         icon: PropTypes.object
     })),
+    footer: PropTypes.string,
     actions: PropTypes.shape({
         text: PropTypes.string.isRequired,
         href: PropTypes.string.isRequired,

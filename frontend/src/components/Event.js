@@ -97,7 +97,7 @@ class Event extends Component {
 
                     <DeadlineCard deadline={event.deadline_dt}/>
 
-                    <PriceCard price={event.price}/>
+                    <PriceCard price={event.price} billed={event.billed}/>
 
                     <ContactCard name={event.contact_name} email={event.contact_email} phone={event.contact_phone}/>
 
