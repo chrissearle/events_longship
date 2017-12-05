@@ -1,18 +1,19 @@
-import React, {Component} from 'react'
-import TextField from 'material-ui/TextField'
-import Radio, {RadioGroup} from 'material-ui/Radio'
-import PropTypes from 'prop-types'
-import {FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel} from 'material-ui/Form'
-import Select from 'material-ui/Select'
+import _ from 'lodash'
 import Button from 'material-ui/Button'
+import {FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel} from 'material-ui/Form'
+import Radio, {RadioGroup} from 'material-ui/Radio'
+import Select from 'material-ui/Select'
+import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
+import PropTypes from 'prop-types'
+import React, {Component} from 'react'
+
+import {objectFor, textFor} from '../formatters'
 
 import EventServices from '../services/EventServices'
 
 import Error from './Error'
 import Message from './Message'
-
-import {textFor, objectFor} from '../formatters'
 
 class Form extends Component {
     state = {
@@ -22,6 +23,12 @@ class Form extends Component {
             section: 'SC'
         }
     };
+
+    componentDidMount() {
+        if (_.isBoolean(this.props.attending)) {
+            this.setAnswer('attending', this.props.attending ? "true" : "false")
+        }
+    }
 
     stateHasValue(key) {
         return this.state.answer.hasOwnProperty(key) && !!this.state.answer[key]
@@ -106,22 +113,29 @@ class Form extends Component {
     };
 
     renderAttending = () => {
-        return (
-            <FormGroup className="form-group">
-                <FormControl component="fieldset" required>
-                    <FormLabel component="legend">{textFor('form.attending.title')}</FormLabel>
-                    <RadioGroup
-                        name="attending"
-                        value={this.state.answer.attending}
-                        onChange={this.handleChange}
-                    >
-                        <FormControlLabel value="true" control={<Radio/>} label={textFor('form.attending.yes')}/>
-                        <FormControlLabel value="false" control={<Radio/>} label={textFor('form.attending.no')}/>
-                    </RadioGroup>
-                </FormControl>
-            </FormGroup>
-
-        )
+        if (this.props.attending) {
+            return (
+                <div>
+                    <Typography type="headline">
+                        {textFor('form.heading.attending')}
+                    </Typography>
+                    <Typography type="body1">
+                        {textFor('form.body.attending')}
+                    </Typography>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <Typography type="headline">
+                        {textFor('form.heading.notattending')}
+                    </Typography>
+                    <Typography type="body1">
+                        {textFor('form.body.notattending')}
+                    </Typography>
+                </div>
+            )
+        }
     };
 
     renderName = () => {
@@ -257,7 +271,8 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-    event: PropTypes.string.isRequired
+    event: PropTypes.string.isRequired,
+    attending: PropTypes.bool.isRequired
 }
 
 export default Form

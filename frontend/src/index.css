@@ -46,3 +46,12 @@ h2.header {
 h2.header .logo {
     margin-right: 8px;
 }
+
+.centered {
+    text-align: center;
+}
+
+.centered button {
+    margin-left: 10px;
+    margin-right: 10px;
+}

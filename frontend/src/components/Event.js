@@ -1,28 +1,31 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import ReactMarkdown from 'react-markdown'
+import _ from 'lodash'
+import Avatar from 'material-ui/Avatar'
+import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
 import moment from 'moment'
-import Avatar from 'material-ui/Avatar'
-
-import EventServices from '../services/EventServices'
-
-import Loading from './Loading'
-import NoSuchEvent from './NoSuchEvent'
-import Form from './Form'
-import Message from './Message'
-import ImageCard from './cards/ImageCard'
-import PriceCard from './cards/PriceCard'
-import DownloadCard from './cards/DownloadCard'
-import LocationCard from './cards/LocationCard'
-import ContactCard from './cards/ContactCard'
-import DeadlineCard from './cards/DeadlineCard'
-import TimeCard from './cards/TimeCard'
+import PropTypes from 'prop-types'
+import React, {Component} from 'react'
+import ReactMarkdown from 'react-markdown'
 
 import logo from '../assets/logo.png'
 
 import {textFor} from '../formatters'
+
+import EventServices from '../services/EventServices'
+import ContactCard from './cards/ContactCard'
+import DeadlineCard from './cards/DeadlineCard'
+import DownloadCard from './cards/DownloadCard'
+import ImageCard from './cards/ImageCard'
+import LocationCard from './cards/LocationCard'
+import PriceCard from './cards/PriceCard'
+import TimeCard from './cards/TimeCard'
+import Form from './Form'
+
+import Loading from './Loading'
+import Message from './Message'
+import NoSuchEvent from './NoSuchEvent'
+
 
 class Event extends Component {
     state = {
@@ -53,11 +56,42 @@ class Event extends Component {
         return moment().isBefore(moment(deadline))
     }
 
-    renderForm(event) {
+    attending = () => {
+        this.setState({
+            attending: true
+        })
+    }
+
+    notAttending = () => {
+        this.setState({
+            attending: false
+        })
+    }
+
+    renderConditionalForm() {
+        if (_.isBoolean(this.state.attending)) {
+            return (
+                <Form event={this.props.event} attending={this.state.attending}/>
+            )
+        } else {
+            return (
+                <div class="centered">
+                    <Button raised color="primary" onClick={this.attending}>
+                        {textFor('event.button.attending')}
+                    </Button>
+                    <Button raised color="secondary" onClick={this.notAttending}>
+                        {textFor('event.button.not_attending')}
+                    </Button>
+                </div>
+            )
+        }
+    }
+
+    renderResponse(event) {
         if (this.isOpen(event.deadline_dt)) {
             return (
                 <Paper className="paper">
-                    <Form event={this.props.event}/>
+                    {this.renderConditionalForm()}
                 </Paper>
             )
         } else {
@@ -85,7 +119,7 @@ class Event extends Component {
 
                         <ReactMarkdown source={event.description}/>
 
-                        {this.renderForm(event)}
+                        {this.renderResponse(event)}
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={5} md={4} lg={3} xl={2}>
