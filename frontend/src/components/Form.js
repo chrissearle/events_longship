@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import Button from 'material-ui/Button'
-import {FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel} from 'material-ui/Form'
-import Radio, {RadioGroup} from 'material-ui/Radio'
+import {FormControl, FormGroup, FormHelperText, FormLabel} from 'material-ui/Form'
 import Select from 'material-ui/Select'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'

@@ -2,7 +2,6 @@ import _ from 'lodash'
 import Avatar from 'material-ui/Avatar'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
-import Paper from 'material-ui/Paper'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
@@ -68,12 +67,8 @@ class Event extends Component {
         })
     }
 
-    renderConditionalForm() {
-        if (_.isBoolean(this.state.attending)) {
-            return (
-                <Form event={this.props.event} attending={this.state.attending}/>
-            )
-        } else {
+    renderConditionalButtons(event) {
+        if (this.isOpen(event.deadline_dt)) {
             return (
                 <div class="centered">
                     <Button raised color="primary" onClick={this.attending}>
@@ -84,16 +79,6 @@ class Event extends Component {
                     </Button>
                 </div>
             )
-        }
-    }
-
-    renderResponse(event) {
-        if (this.isOpen(event.deadline_dt)) {
-            return (
-                <Paper className="paper">
-                    {this.renderConditionalForm()}
-                </Paper>
-            )
         } else {
             return (
                 <Message>
@@ -101,6 +86,24 @@ class Event extends Component {
 
                     <p>{textFor('error.passed_deadline.body')}</p>
                 </Message>
+            )
+        }
+    }
+
+    renderEventDetails(event) {
+        if (_.isBoolean(this.state.attending)) {
+            return (
+                <Form event={this.props.event} attending={this.state.attending}/>
+            )
+        } else {
+            return (
+                <div>
+                    <h3>{event.location}</h3>
+
+                    <ReactMarkdown source={event.description}/>
+
+                    {this.renderConditionalButtons(event)}
+                </div>
             )
         }
     }
@@ -115,11 +118,7 @@ class Event extends Component {
                             {event.title}
                         </h2>
 
-                        <h3>{event.location}</h3>
-
-                        <ReactMarkdown source={event.description}/>
-
-                        {this.renderResponse(event)}
+                        {this.renderEventDetails(event)}
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={5} md={4} lg={3} xl={2}>
