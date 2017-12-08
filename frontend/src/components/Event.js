@@ -70,7 +70,7 @@ class Event extends Component {
     renderConditionalButtons(event) {
         if (this.isOpen(event.deadline_dt)) {
             return (
-                <div class="centered">
+                <div className="centered">
                     <Button raised color="primary" onClick={this.attending}>
                         {textFor('event.button.attending')}
                     </Button>

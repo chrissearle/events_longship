@@ -2,7 +2,6 @@ import _ from 'lodash'
 import Button from 'material-ui/Button'
 import {FormControl, FormGroup, FormHelperText, FormLabel} from 'material-ui/Form'
 import Select from 'material-ui/Select'
-import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
@@ -12,6 +11,13 @@ import {objectFor, textFor} from '../formatters'
 import EventServices from '../services/EventServices'
 
 import Error from './Error'
+import Attending from './fields/Attending'
+import Buttons from './fields/Buttons'
+import Notes from './fields/Notes'
+import Steps from './fields/Steps'
+import Summary from './fields/Summary'
+import Text from './fields/Text'
+
 import Message from './Message'
 
 class Form extends Component {
@@ -20,13 +26,38 @@ class Form extends Component {
         error: false,
         answer: {
             section: 'SC'
-        }
+        },
+        activeStep: 0,
+        stepCount: 0
     };
 
-    componentDidMount() {
-        if (_.isBoolean(this.props.attending)) {
-            this.setAnswer('attending', this.props.attending ? "true" : "false")
+    handleNext = () => {
+        const {activeStep} = this.state
+
+        this.setState({
+            activeStep: activeStep + 1
+        })
+    }
+
+    handleBack = () => {
+        const {activeStep} = this.state
+
+        this.setState({
+            activeStep: activeStep - 1
+        })
+    }
+
+    componentWillMount = () => {
+        let steps = objectFor("steps.attending")
+
+        if (!this.props.attending) {
+            steps = objectFor("steps.not_attending")
         }
+
+        this.setState({
+            steps: steps,
+            stepCount: steps.length
+        })
     }
 
     stateHasValue(key) {
@@ -34,7 +65,11 @@ class Form extends Component {
     }
 
     sendAnswer = () => {
-        EventServices.sendAnswer(this.props.event, this.state.answer, () => {
+        const answer = this.state.answer;
+
+        answer.attending = this.props.attending ? 'true' : 'false'
+
+        EventServices.sendAnswer(this.props.event, answer, () => {
             this.setState({
                 delivered: true,
                 error: false
@@ -45,7 +80,7 @@ class Form extends Component {
                 error: true
             })
         })
-    };
+    }
 
     setAnswer = (field, value) => {
         const answer = this.state.answer || {section: 'SC'}
@@ -55,31 +90,53 @@ class Form extends Component {
         this.setState({
             answer: answer
         })
-    };
+    }
+
+    hasNameAndSection = () => {
+        return this.stateHasValue('name') && this.stateHasValue('section')
+    }
+
+    isAdultOrHasContactName = () => {
+        return this.isAdult(this.state.answer.section) || this.stateHasValue('main_contact_name')
+    }
+
+    hasMainContact = () => {
+        return this.stateHasValue('main_contact_email') && this.stateHasValue('main_contact_phone')
+    }
+
+    stepComplete(step) {
+        switch (step) {
+            case 0:
+                return true
+            case 1:
+                return this.hasNameAndSection()
+            case 2:
+                return this.props.attending && this.isAdultOrHasContactName() && this.hasMainContact()
+            case 3:
+                return true;
+            default:
+                return true;
+        }
+    }
 
     isComplete = () => {
-        return (
-            this.stateHasValue('name')
-            &&
-            this.stateHasValue('section')
-            &&
-            (
-                this.state.attending === 'true'
-                    ?
-                    this.stateHasValue('main_contact_email')
-                    &&
-                    this.stateHasValue('main_contact_phone')
-                    &&
-                    this.isAdult(this.state.answer.section)
-                        ?
-                        true
-                        :
-                        this.stateHasValue('main_contact_name')
-                    :
-                    true
+        if (!this.props.attending) {
+            return (
+                this.stepComplete(0)
+                &&
+                this.stepComplete(1)
             )
-        )
+        }
 
+        return (
+            this.stepComplete(0)
+            &&
+            this.stepComplete(1)
+            &&
+            this.stepComplete(2)
+            &&
+            this.stepComplete(3)
+        )
     };
 
     isAdult = (section) => {
@@ -87,20 +144,14 @@ class Form extends Component {
     };
 
     renderTextField = (name, textKey, required, type = 'input') => {
-        return (
-            <FormGroup className="form-group">
-                <TextField
-                    name={name}
-                    label={textFor(`${textKey}.title`)}
-                    helperText={textFor(`${textKey}.helptext`)}
-                    value={this.state.answer[name] || ''}
-                    required={required}
-                    onChange={this.handleChange}
-                    fullWidth
-                    type={type}
-                />
-            </FormGroup>
-        )
+        return <Text
+            name={name}
+            textKey={textKey}
+            required={required}
+            type={type}
+            value={this.state.answer[name]}
+            handleChange={this.handleChange}
+        />
     };
 
     handleSelectChange = name => event => {
@@ -109,36 +160,6 @@ class Form extends Component {
 
     handleChange = (event) => {
         this.setAnswer(event.target.name, event.target.value)
-    };
-
-    renderAttending = () => {
-        if (this.props.attending) {
-            return (
-                <div>
-                    <Typography type="headline">
-                        {textFor('form.heading.attending')}
-                    </Typography>
-                    <Typography type="body1">
-                        {textFor('form.body.attending')}
-                    </Typography>
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <Typography type="headline">
-                        {textFor('form.heading.notattending')}
-                    </Typography>
-                    <Typography type="body1">
-                        {textFor('form.body.notattending')}
-                    </Typography>
-                </div>
-            )
-        }
-    };
-
-    renderName = () => {
-        return this.renderTextField('name', 'form.name', true)
     };
 
     renderSection = () => {
@@ -169,7 +190,7 @@ class Form extends Component {
     };
 
     renderContacts = () => {
-        if (this.state.answer.attending === 'true') {
+        if (this.props.attending) {
             if (this.isAdult(this.state.answer.section)) {
                 return (
                     <div>
@@ -205,29 +226,54 @@ class Form extends Component {
         }
     };
 
-    renderNotes = () => {
-        if (this.state.answer.attending === 'true') {
-            return (
-                <div>
-                    <h3>{textFor('form.notes.section.title')}</h3>
+    renderSubmit = () => {
+        const {activeStep, stepCount} = this.state
 
-                    <FormGroup className="form-group">
-                        <TextField
-                            name="notes"
-                            label={textFor('form.notes.title')}
-                            value={this.state.answer.notes || ''}
-                            onChange={this.handleChange}
-                            helperText={textFor('form.notes.helptext')}
-                            multiline={true}
-                            rows={1}
-                            rowsMax={20}
-                            fullWidth
-                        />
-                    </FormGroup>
-                </div>
+        if (activeStep === stepCount - 1) {
+            const complete = this.isComplete()
+
+            return (
+                <Button raised color="primary" disabled={!complete} onClick={this.sendAnswer}>
+                    {textFor('form.button.title')}
+                </Button>
             )
         }
-    };
+
+    }
+
+    renderMove = () => {
+        const {activeStep, stepCount} = this.state
+        const stepComplete = this.stepComplete(activeStep)
+        const complete = this.isComplete()
+
+        return <Buttons activeStep={activeStep} complete={complete} handleBack={this.handleBack}
+                        handleNext={this.handleNext} sendAnswer={this.sendAnswer} stepComplete={stepComplete}
+                        stepCount={stepCount}
+        />
+    }
+
+
+    canShowStep = (step) => {
+        return this.state.activeStep === step && this.state.stepCount >= step
+    }
+
+    renderSummary = () => {
+        const sections = objectFor('sections')
+
+        let sectionName = ''
+
+        if (this.state.answer.section) {
+            sectionName = _.find(sections, (s) => {
+                return s.value === this.state.answer.section
+            }).label
+        }
+
+        const isAdult = this.isAdult(this, this.state.answer.section)
+
+        return (
+            <Summary isAdult={isAdult} sectionName={sectionName} answer={this.state.answer}/>
+        )
+    }
 
     render() {
         if (this.state.error) {
@@ -248,22 +294,56 @@ class Form extends Component {
             )
         }
 
-        const complete = this.isComplete()
+
+        const {activeStep} = this.state
 
         return (
             <div>
-                {this.renderAttending()}
-                <h3>Om deg</h3>
-                {this.renderName()}
-                {this.renderSection()}
-                {this.renderContacts()}
-                {this.renderNotes()}
-                <Button raised color="primary" disabled={!complete} onClick={this.sendAnswer}>
-                    {textFor('form.button.title')}
-                </Button>
-                <Typography type="caption">
-                    {textFor('form.button.helptext')}
-                </Typography>
+                <Steps activeStep={activeStep} attending={this.props.attending} steps={this.state.steps}/>
+
+                {this.canShowStep(0) &&
+                <div>
+                    <Attending attending={this.props.attending}/>
+                    {this.renderMove()}
+                </div>
+                }
+
+                {this.canShowStep(1) &&
+                <div>
+                    <h3>Om deg</h3>
+                    {this.renderTextField('name', 'form.name', true)}
+                    {this.renderSection()}
+                    {this.renderMove()}
+                </div>
+                }
+
+                {this.canShowStep(2) &&
+                <div>
+                    {this.renderContacts()}
+                    {this.renderMove()}
+                </div>
+                }
+
+                {this.canShowStep(3) &&
+                <div>
+                    <Notes attending={this.props.attending} handleChange={this.handleChange}
+                           notes={this.state.answer.notes}/>
+                    {this.renderMove()}
+                </div>
+                }
+
+                {this.canShowStep(4) &&
+                <div>
+                    {this.renderSummary()}
+                    {this.renderMove()}
+                    <div className='centered'>
+                        <Typography type="caption">
+                            {textFor('form.button.helptext')}
+                        </Typography>
+                    </div>
+                </div>
+                }
+
             </div>
         )
     }

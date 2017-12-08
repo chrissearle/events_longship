@@ -58,12 +58,21 @@ class InfoCard extends Component {
 
 InfoCard.propTypes = {
     media: PropTypes.string,
-    header: PropTypes.string,
+    header: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.string
+    ]),
     body: PropTypes.arrayOf(PropTypes.shape({
-        body: PropTypes.string.isRequired,
+        body: PropTypes.oneOfType([
+            PropTypes.object.isRequired,
+            PropTypes.string.isRequired
+        ]),
         icon: PropTypes.object
     })),
-    footer: PropTypes.string,
+    footer: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.string
+    ]),
     actions: PropTypes.shape({
         text: PropTypes.string.isRequired,
         href: PropTypes.string.isRequired,

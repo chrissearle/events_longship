@@ -4,17 +4,17 @@
   "card.info.download.title": "Last Ned",
   "card.info.title": "Informasjon",
   "card.location.title": "Hvor",
-  "card.price.footer.cash": "Du kan betale kontant ved oppmøte eller med Vipps til 140451 (vennligst oppgi både speiderens navn og hvilket arrangement i meldingsfeltet)",
   "card.price.footer.bill": "Vi kommer til å sende ut en faktura for arrangementet",
+  "card.price.footer.cash": "Du kan betale kontant ved oppmøte eller med Vipps til 140451 (vennligst oppgi både speiderens navn og hvilket arrangement i meldingsfeltet)",
   "card.price.title": "Pris",
   "card.time.title": "Når",
-  "event.button.attending": "Meld meg på!",
-  "event.button.not_attending": "Jeg kan dessverre ikke komme",
   "error.general.title": "Beklager - noe gikk galt",
   "error.notfound.body": "Vi kunne ikke finne arrangementet du ønsket. Vennligst sjekk lenken du har fått.",
   "error.notfound.title": "Arrangement finnes ikke",
   "error.passed_deadline.body": "Du kan prøve å ta kontakt med arrangør men det er muligens for seint.",
   "error.passed_deadline.title": "Beklager - men det er nå etter påmeldingsfristen",
+  "event.button.attending": "Meld meg på!",
+  "event.button.not_attending": "Jeg kan dessverre ikke komme",
   "form.attending.no": "Nei - dessverre kan jeg ikke",
   "form.attending.title": "Blir du med?",
   "form.attending.yes": "Ja - jeg blir med",
@@ -54,11 +54,20 @@
   "form.homecontact2.tel.title": "Tlf/Mob",
   "form.name.helptext": "Navn på deltaker",
   "form.name.title": "Navn",
-  "form.notes.section.title": "Annet",
   "form.notes.helptext": "Annen informasjon som lederne bør vite - f.eks. matallergier osv",
+  "form.notes.section.title": "Annet",
   "form.notes.title": "Annen informasjon",
   "form.section.helptext": "Hvilken enhet tilhører du (velg Venn hvis ingen andre passer)",
   "form.section.title": "Enhet",
+  "form.steps.back": "Tilbake",
+  "form.steps.forward": "Neste",
+  "summary.heading": "Oppsummering",
+  "summary.body": "Vennligst sjekk at alle detaljer stemmer så trykk på 'Send svar' knappen nederst for å sende inn påmeldingen",
+  "summary.heading.about_you": "Om deg",
+  "summary.heading.contact_1_child": "Hjemmekontakt #1",
+  "summary.heading.contact_2_child": "Hjemmekontakt #2",
+  "summary.heading.contact_adult": "Kontaktinformasjon",
+  "summary.heading.notes": "Annet",
   "sections": [
     {
       "value": "CU",
@@ -81,8 +90,40 @@
       "label": "Leder"
     },
     {
-      "alue": "FR",
+      "value": "FR",
       "label": "Venn"
+    }
+  ],
+  "steps.attending": [
+    {
+      "key": "step1",
+      "prompt": "Påmelding"
+    },
+    {
+      "key": "step2",
+      "prompt": "Om deg"
+    },
+    {
+      "key": "step3",
+      "prompt": "Kontakt informasjon"
+    },
+    {
+      "key": "step4",
+      "prompt": "Annet"
+    },
+    {
+      "key": "step5",
+      "prompt": "Oppsummering"
+    }
+  ],
+  "steps.not_attending": [
+    {
+      "key": "step1",
+      "prompt": "Avmelding"
+    },
+    {
+      "key": "step2",
+      "prompt": "Om deg"
     }
   ]
 }
