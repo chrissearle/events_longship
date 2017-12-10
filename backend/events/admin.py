@@ -1,13 +1,67 @@
 from django.contrib import admin
 from django.utils import timezone
 from django.utils.html import format_html
-from .models import (Event, Attendee)
+from import_export import resources, fields
 from import_export.admin import ExportActionModelAdmin
+
+from .models import (Event, Attendee, SECTION)
+
+
+class AttendeeResource(resources.ModelResource):
+    name = fields.Field(column_name='Navn')
+    main_contact_name = fields.Field(column_name='Navn #1')
+    main_contact_phone = fields.Field(column_name='Tlf #1')
+    main_contact_email = fields.Field(column_name='E-post #1')
+    alt_contact_name = fields.Field(column_name='Navn #2')
+    alt_contact_phone = fields.Field(column_name='Tlf #2')
+    alt_contact_email = fields.Field(column_name='E-post #2')
+    section = fields.Field(column_name='Enhet')
+    attending = fields.Field(column_name='Deltaker')
+    notes = fields.Field(column_name='Notater')
+
+    class Meta:
+        model = Attendee
+        exclude = ('id', 'event',)
+
+    def dehydrate_name(self, attendee):
+        return attendee.name
+
+    def dehydrate_main_contact_name(self, attendee):
+        return attendee.main_contact_name
+
+    def dehydrate_main_contact_phone(self, attendee):
+        return attendee.main_contact_phone
+
+    def dehydrate_main_contact_email(self, attendee):
+        return attendee.main_contact_email
+
+    def dehydrate_alt_contact_name(self, attendee):
+        return attendee.alt_contact_name
+
+    def dehydrate_alt_contact_phone(self, attendee):
+        return attendee.alt_contact_phone
+
+    def dehydrate_alt_contact_email(self, attendee):
+        return attendee.alt_contact_email
+
+    def dehydrate_section(self, attendee):
+        return next(section for (key, section) in SECTION if key == attendee.section)
+
+    def dehydrate_attending(self, attendee):
+        if attendee.attending:
+            return "Ja"
+        else:
+            return "Nei"
+
+    def dehydrate_notes(self, attendee):
+        return attendee.notes
 
 
 class AttendeeAdmin(ExportActionModelAdmin):
-    list_filter = ('event', 'attending', 'section', )
-    list_display = ('name', 'attending', 'section', )
+    resource_class = AttendeeResource
+
+    list_filter = ('event', 'attending', 'section',)
+    list_display = ('name', 'attending', 'section',)
 
 
 admin.site.register(Attendee, AttendeeAdmin)
@@ -51,4 +105,3 @@ class EventAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Event, EventAdmin)
-

@@ -1,5 +1,21 @@
 from django.db import models
 
+CUB = 'CU'
+PIONEER = 'PI'
+SCOUT = 'SC'
+ROVER = 'RO'
+LEADER = 'LE'
+FRIEND = 'FR'
+
+SECTION = (
+    (CUB, 'Flokken'),
+    (PIONEER, 'Pionerene'),
+    (SCOUT, 'Troppen'),
+    (ROVER, 'Roverlag'),
+    (LEADER, 'Leder'),
+    (FRIEND, 'Venn'),
+)
+
 
 class Event(models.Model):
     title = models.CharField(max_length=200)
@@ -41,22 +57,6 @@ class Event(models.Model):
 
 
 class Attendee(models.Model):
-    CUB = 'CU'
-    PIONEER = 'PI'
-    SCOUT = 'SC'
-    ROVER = 'RO'
-    LEADER = 'LE'
-    FRIEND = 'FR'
-
-    SECTION = (
-        (CUB, 'Flokken'),
-        (PIONEER, 'Pionerene'),
-        (SCOUT, 'Troppen'),
-        (ROVER, 'Roverlag'),
-        (LEADER, 'Leder'),
-        (FRIEND, 'Venn'),
-    )
-
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     main_contact_name = models.CharField(
