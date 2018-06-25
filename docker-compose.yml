@@ -36,6 +36,8 @@ services:
   db:
     image: postgres:latest
     container_name: events_longship_postgres
+    volumes:
+      - /opt/longship/events_db:/var/lib/postgresql/data
     networks:
       - events_longship
 
